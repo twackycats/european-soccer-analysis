@@ -26,11 +26,11 @@ shinyUI(fluidPage(
                                 options = list(maxItems = 2))),
                mainPanel(
                  chartJSRadarOutput("radarchart"),
-                 width=12))
+                 width=7))
              )
     
     # ***Add your tab panels below these two comments***
-    # (Note: A comma is required after each one. You will need to put in a comma above when adding the second tabPanel)
+    # (Note: A comma is required after each one, except for the last. You will need to put in a comma above when adding the next tabPanel)
     
     )
   ))
