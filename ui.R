@@ -1,8 +1,12 @@
+# Add dependencies here
 library(shiny)
+library(dplyr)
+library(radarchart)
+
 # If your UI code requires a dataframe, initialize it here.
 # read in the player.csv file and create a vector containing all player names for use in the selectizeInput
 player <- read.csv("data/player.csv")
-player_names <- as.vector(as.matrix(player %>% select(player_name)))
+player_names <- as.vector(as.matrix(select(player, player_name)))
 
 # Define UI for the European Soccer Analysis application
 shinyUI(fluidPage(

@@ -1,0 +1,10 @@
+name: european-soccer-analysis
+title:
+account: twackycats
+server: shinyapps.io
+appId: 142042
+bundleId: 635175
+url: https://twackycats.shinyapps.io/european-soccer-analysis/
+when: 1480835525.78865
+asMultiple: FALSE
+asStatic: FALSE
