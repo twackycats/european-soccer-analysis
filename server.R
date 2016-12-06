@@ -9,9 +9,13 @@ shinyServer(function(input, output) {
   # Source the radarchart.R script
   source("scripts/radarchart.R")
   source("scripts/CreateScatter.r")
+  source("scripts/bestWorstComparison.r")
   # Call the CreateRadarChart function, providing the players_organized dataframe and input as parameters. This function returns a radarChart.
   output$radarchart <- CreateRadarChart(players_organized, input)
   
   # ***Add your server code below this line***
   output$scatter <- CreateScatter(players_organized, input)
+  output$maxMin <- renderText({
+    record(players_organized, input$select)
+  })
 })
