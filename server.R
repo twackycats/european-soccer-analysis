@@ -14,5 +14,5 @@ shinyServer(function(input, output) {
   output$radarchart <- CreateRadarChart(players_organized, input)
   
   # ***Add your server code below this line***
-  output$scatterplot <- CreateScatter(players_organized, input)
+  output$scatter <- CreateScatter(players_organized, input)
 })

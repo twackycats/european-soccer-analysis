@@ -9,9 +9,9 @@ library(plotly)
 player <- read.csv("data/player.csv")
 player_organized <- read.csv("data/players_organized.csv")
 player_names <- as.vector(as.matrix(select(player, player_name)))
-player_attributes <- colnames(player_organized)[6:42]
+player_attributes <- c(colnames(player_organized)[6:7], colnames(player_organized)[10:47])
 
-# Define UI for the European Soccer Analysis application
+# Define UI for tcohe European Soccer Analysis application
 shinyUI(fluidPage(
   # Create a tabsetPanel
   tabsetPanel(
