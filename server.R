@@ -2,7 +2,6 @@
 library(shiny)
 library(radarchart)
 library(plotly)
-
 # Initialize all required dataframes here, then pass them to a function in your sourced script. Doing so will keep this code very clean.
 players_organized <- read.csv("data/players_organized.csv")
 
