@@ -24,7 +24,7 @@ shinyServer(function(input, output) {
   #ADD THE INPUT NAME TO THE LIST ABOVE *************** 
   
   output$maxMin <- renderText({
-    record(players_organized, input)
+    record(players_organized, input$select)
   })
   output$teamPlot <- renderTable({
     team(teamData, input, outList)

@@ -54,7 +54,9 @@ shinyUI(fluidPage(
              #Creates a sidebar layout
              sidebarLayout(
                sidebarPanel(
-                 selectInput("select", label = h3("Select an attribute: "), choices=player_attributes, selected = player_attributes[5])
+                 #Weight and height are removed from choices as we want users to retrieve concise 
+                 #comparisons to skills in this simple part of the app. 
+                 selectInput("select", label = h3("Select an attribute: "), choices=player_attributes[-c(1, 2)])
                ),
                #in which the main part of the shiny app
                mainPanel(
@@ -68,20 +70,18 @@ shinyUI(fluidPage(
              sidebarLayout(
                sidebarPanel(
                  
-                 
-                 selectInput("buildUpPlayDribblingClass", label = h3("buildUpPlayDribblingClass"), choices = c("All", unique(teams$buildUpPlayDribblingClass))),
-                 selectInput("buildUpPlayPassingClass", label = h3("buildUpPlayPassingClass"), choices = c("All", unique(teams$buildUpPlayPassingClass))),
-                 selectInput("buildUpPlayPositioningClass", label = h3("buildUpPlayPositioningClass"), choices = c("All", unique(teams$buildUpPlayPositioningClass))),
-                 selectInput("buildUpPlaySpeedClass", label = h3("buildUpPlaySpeedClass"), choices = c("All", unique(teams$buildUpPlaySpeedClass))),
-                 selectInput("chanceCreationCrossingClass", label = h3("chanceCreationCrossingClass"), choices = c("All", unique(teams$chanceCreationCrossingClass))),
-                 selectInput("chanceCreationPassingClass", label = h3("chanceCreationPassingClass"), choices = c("All", unique(teams$chanceCreationPassingClass))),
-                 selectInput("chanceCreationPositioningClass", label = h3("chanceCreationPositioningClass"), choices = c("All", unique(teams$chanceCreationPositioningClass))),
-                 selectInput("chanceCreationShootingClass", label = h3("chanceCreationShootingClass"), choices = c("All", unique(teams$chanceCreationShootingClass))),
-                 selectInput("defenceAggressionClass", label = h3("defenceAggressionClass"), choices = c("All", unique(teams$defenceAggressionClass))),
-                 selectInput("defenceDefenderLineClass", label = h3("defenceDefenderLineClass"), choices = c("All", unique(teams$defenceDefenderLineClass))),
-                 selectInput("defencePressureClass", label = h3("defencePressureClass"), choices = c("All", unique(teams$defencePressureClass))),
-                 selectInput("defenceTeamWidthClass", label = h3("defenceTeamWidthClass"), choices = c("All", unique(teams$defenceTeamWidthClass)))
-                 
+                 selectInput("buildUpPlayDribblingClass", label = h3("Build Up Play Dribbling"), choices = c("All", unique(teams$buildUpPlayDribblingClass))),
+                 selectInput("buildUpPlayPassingClass", label = h3("Build Up Play Passing"), choices = c("All", unique(teams$buildUpPlayPassingClass))),
+                 selectInput("buildUpPlayPositioningClass", label = h3("Build Up Play Positioning"), choices = c("All", unique(teams$buildUpPlayPositioningClass))),
+                 selectInput("buildUpPlaySpeedClass", label = h3("Build Up Play Speed"), choices = c("All", unique(teams$buildUpPlaySpeedClass))),
+                 selectInput("chanceCreationCrossingClass", label = h3("Chance Creation Crossing"), choices = c("All", unique(teams$chanceCreationCrossingClass))),
+                 selectInput("chanceCreationPassingClass", label = h3("chance Creation Passing"), choices = c("All", unique(teams$chanceCreationPassingClass))),
+                 selectInput("chanceCreationPositioningClass", label = h3("Chance Creation Positioning"), choices = c("All", unique(teams$chanceCreationPositioningClass))),
+                 selectInput("chanceCreationShootingClass", label = h3("Chance Creation Shooting"), choices = c("All", unique(teams$chanceCreationShootingClass))),
+                 selectInput("defenceAggressionClass", label = h3("Defence Aggression"), choices = c("All", unique(teams$defenceAggressionClass))),
+                 selectInput("defenceDefenderLineClass", label = h3("Defence Defender Line"), choices = c("All", unique(teams$defenceDefenderLineClass))),
+                 selectInput("defencePressureClass", label = h3("Defence Pressure"), choices = c("All", unique(teams$defencePressureClass))),
+                 selectInput("defenceTeamWidthClass", label = h3("Defence Team Width"), choices = c("All", unique(teams$defenceTeamWidthClass)))
                  
                ),
                #in which the main part of the shiny app

@@ -2,7 +2,6 @@ library(dplyr)
 library(shiny)
 
 record <- function(use, input){
-  print(input)
   #Uses a csv file that reflects current data
   use <- use %>% group_by(player_fifa_api_id) %>% top_n(n=1, wt = date)
   
@@ -14,9 +13,8 @@ record <- function(use, input){
 
   #worst player with complete relevent information at hand
   worst <- use %>% arrange(var) %>% head(1)
-
   
-  ret <- paste0("The best ", input, " player was: ", best$name, " while the worst was: ", worst$name)
+  ret <- paste0("The best ", input, " player was: ", best$name, " while the worst was: ", worst$name, ". ")
   
   return(ret)
 }
