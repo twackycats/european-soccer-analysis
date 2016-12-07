@@ -9,9 +9,10 @@ player <- read.csv("data/player.csv")
 player_organized <- read.csv("data/players_organized.csv")
 player_names <- as.vector(as.matrix(select(player, player_name)))
 player_attributes <- c(colnames(player_organized)[6:7], colnames(player_organized)[10:11], colnames(player_organized)[15:47])
+teams <- read.csv("data/team_revised.csv", stringsAsFactors = FALSE)
 
 # Define UI for the European Soccer Analysis application
-shinyUI(fluidPage(theme = "bootstrap.css",
+shinyUI(fluidPage(
   # Create a tabsetPanel
   tabsetPanel(
     selected = "Player Attribute Radar Chart",
@@ -59,6 +60,34 @@ shinyUI(fluidPage(theme = "bootstrap.css",
                mainPanel(
                  #is the output of the comparison of the currently best and worst European Soccer players 
                  textOutput("maxMin")
+               )
+             )
+    ),
+    tabPanel("Team Chooser", 
+             #Creates a sidebar layout
+             sidebarLayout(
+               sidebarPanel(
+                 
+                 
+                 selectInput("buildUpPlayDribblingClass", label = h3("buildUpPlayDribblingClass"), choices = c("All", unique(teams$buildUpPlayDribblingClass))),
+                 selectInput("buildUpPlayPassingClass", label = h3("buildUpPlayPassingClass"), choices = c("All", unique(teams$buildUpPlayPassingClass))),
+                 selectInput("buildUpPlayPositioningClass", label = h3("buildUpPlayPositioningClass"), choices = c("All", unique(teams$buildUpPlayPositioningClass))),
+                 selectInput("buildUpPlaySpeedClass", label = h3("buildUpPlaySpeedClass"), choices = c("All", unique(teams$buildUpPlaySpeedClass))),
+                 selectInput("chanceCreationCrossingClass", label = h3("chanceCreationCrossingClass"), choices = c("All", unique(teams$chanceCreationCrossingClass))),
+                 selectInput("chanceCreationPassingClass", label = h3("chanceCreationPassingClass"), choices = c("All", unique(teams$chanceCreationPassingClass))),
+                 selectInput("chanceCreationPositioningClass", label = h3("chanceCreationPositioningClass"), choices = c("All", unique(teams$chanceCreationPositioningClass))),
+                 selectInput("chanceCreationShootingClass", label = h3("chanceCreationShootingClass"), choices = c("All", unique(teams$chanceCreationShootingClass))),
+                 selectInput("defenceAggressionClass", label = h3("defenceAggressionClass"), choices = c("All", unique(teams$defenceAggressionClass))),
+                 selectInput("defenceDefenderLineClass", label = h3("defenceDefenderLineClass"), choices = c("All", unique(teams$defenceDefenderLineClass))),
+                 selectInput("defencePressureClass", label = h3("defencePressureClass"), choices = c("All", unique(teams$defencePressureClass))),
+                 selectInput("defenceTeamWidthClass", label = h3("defenceTeamWidthClass"), choices = c("All", unique(teams$defenceTeamWidthClass)))
+                 
+                 
+               ),
+               #in which the main part of the shiny app
+               mainPanel(
+                 #is the output of the comparison of the currently best and worst European Soccer players 
+                 tableOutput("teamPlot")
                )
              )
     )
