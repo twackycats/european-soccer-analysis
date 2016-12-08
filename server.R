@@ -38,14 +38,10 @@ shinyServer(function(input, output) {
   # ***Add your server code below this line***
   output$scatter <- CreateScatter(players_organized, input)
   
-  outList <- c("X_Value", "Y_Value", "players", "select")
-  #************** IF ADDING MORE INPUTS FROM UI.R PLS 
-  #ADD THE INPUT NAME TO THE LIST ABOVE *************** 
-  
   output$maxMin <- renderText({
     record(players_organized, input$select)
   })
   output$teamPlot <- renderPlotly({
-    team(teamData, input$choice, input$teamSelected)
+    team(teamData, input$choice, input$first, input$teamSelected)
   })
 })

@@ -66,12 +66,13 @@ shinyUI(fluidPage(theme="bootstrap.css",
                )
              )
     ),
-    tabPanel("Team Comparison and G", 
-             #Creates a sidebar layout
+    tabPanel("Team Skill Changes and Comparisons", 
+             #Creates a   sidebar layout
              sidebarLayout(
                sidebarPanel(
-                 selectInput("choice", label = h3("Select a mode: "), choices=c("Inspect Team History (Uses first selection from Team choices below)"=FALSE, "Compare"=TRUE), selected = "FALSE"),
-                 selectizeInput("teamSelected", label=NULL, choices = team_names, selected = team_names[1], team_names[2], multiple = TRUE)
+                 radioButtons("choice", label = h3("Select a mode: "), choices=c("Inspect Team History (Uses first selection from Team choices below)"=FALSE, "Compare"=TRUE), selected = "FALSE"),
+                 selectInput("first", label = h3("Select a main team: "), choices=team_names, selected = team_names[1]),
+                 selectizeInput("teamSelected", label=h2("Other Teams (optional)"), choices = team_names, selected = team_names[2], team_names[3], multiple = TRUE)
                ),
                #in which the main part of the shiny app
                mainPanel(
