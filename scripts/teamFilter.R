@@ -19,11 +19,11 @@ team <- function(df, choice, teamSelected){
   use[,8] <- NULL
   if(choice==FALSE){
     use <- use %>% arrange(date) %>% filter(team_long_name==teamSelected[1])
-    use[,1:6] <- NULL
-    nameS <- colnames(use)
-    print(as.vector(use[1,]))
-    p <- plot_ly(y=nameS, x = as.vector(use[1,]), type = 'bar', name = "Old Data") %>%
-      add_trace(y=nameS, x = as.vector(use[2,]), name = 'Newest Data') %>%
+    use2<- use
+    use2[,1:6] <- NULL
+    nameS <- colnames(use2)
+    p <- plot_ly(y=nameS, x = as.vector(use2[1,]), type = 'bar', name = "Old Data") %>%
+      add_trace(y=nameS, x = as.vector(use2[2,]), name = 'Newest Data') %>%
       layout(title = paste0('Historical change of stats for ', teamSelected[1]), xaxis = list(title = 'Skill Type'), barmode = 'group')
     
     return(p)
