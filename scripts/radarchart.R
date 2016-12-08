@@ -10,7 +10,7 @@ CreateRadarChart <- function(df, input){
       latest_stats <- df %>% group_by(player_fifa_api_id) %>% top_n(n=1, wt = date) %>% select(player_name, 15:47)
       # remove player_fifa_api_id separately to prevent R from "Adding missing grouping variables"
       latest_stats <- subset(latest_stats, select = -player_fifa_api_id)
-      
+      if(length(input$players)==0){ return() }
       # combine the records of the players into a dataframe using rbind
       # start with a base dataframe containing the stats for one of the players
       radar_stats <- filter(latest_stats, player_name == input$players[1])
