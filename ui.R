@@ -2,13 +2,15 @@
 library(shiny)
 library(dplyr)
 library(radarchart)
-library(plotly)
+library(ggplot2)
 # If your UI code requires a dataframe, initialize it here.
 # read in the player.csv file and create a vector containing all player names for use in the selectizeInput
 player <- read.csv("data/player.csv")
 player_organized <- read.csv("data/players_organized.csv")
 player_names <- as.vector(as.matrix(select(player, player_name)))
-player_attributes <- c(colnames(player_organized)[6:7], colnames(player_organized)[10:11], colnames(player_organized)[15:47])
+
+# Gets only the numerical attributes on the data
+player_num_attributes <- c(colnames(player_organized)[6:7], colnames(player_organized)[10:11], colnames(player_organized)[15:47])
 teams <- read.csv("data/team_revised.csv", stringsAsFactors = FALSE)
 team_names <- unique(teams$team_long_name)
 
@@ -47,7 +49,7 @@ shinyUI(fluidPage(theme="bootstrap.css",
                              selected = player_attributes[2])
                ),
                mainPanel(
-                 plotlyOutput('scatter')
+                 plotOutput('scatter')
                )
              )
     ),

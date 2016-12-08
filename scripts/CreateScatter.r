@@ -1,12 +1,11 @@
 library(dplyr)
-library(plotly)
+library(ggplot2)
 CreateScatter <- function(df, input) {
     return(
-    renderPlotly({
-      xval <- df[, input$X_Value]
-      yval <- df[, input$Y_Value]
-      plot_ly(data = df, x = xval, y = yval, type = 'scatter')
-    }
+    renderPlot({
+      x_value <- df[, input$X_Value]
+      y_value <- df[, input$Y_Value]
+      ggplot(df,aes(x=x_value,y=y_value)) + geom_point(alpha = 0.1)    }
     )
   )
 }
