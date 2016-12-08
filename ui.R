@@ -12,7 +12,7 @@ player_attributes <- c(colnames(player_organized)[6:7], colnames(player_organize
 teams <- read.csv("data/team_revised.csv", stringsAsFactors = FALSE)
 
 # Define UI for the European Soccer Analysis application
-shinyUI(fluidPage(
+shinyUI(fluidPage(theme="bootstrap.css",
   # Create a tabsetPanel
   tabsetPanel(
     selected = "Player Attribute Radar Chart",
