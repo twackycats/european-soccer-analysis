@@ -11,9 +11,13 @@ CreateRadarChart <- function(df, input){
       # remove player_fifa_api_id separately to prevent R from "Adding missing grouping variables"
       latest_stats <- subset(latest_stats, select = -player_fifa_api_id)
       
-      # combine the records of the two players into a dataframe using rbind
-      radar_stats <- rbind(filter(latest_stats, player_name == input$players[1]), filter(latest_stats, player_name == input$players[2]))
-      
+      # combine the records of the players into a dataframe using rbind
+      # start with a base dataframe containing the stats for one of the players
+      radar_stats <- filter(latest_stats, player_name == input$players[1])
+      # add additional rows for the rest of the players in input$players
+      for(player in input$players[-1]){
+        radar_stats <- rbind(radar_stats, filter(latest_stats, player_name == player))
+      }
       # prepare the dataframe for the chartJSRadar function
       radar_stats <- gather(radar_stats, key=Label, value=Score, -player_name) %>% spread(key=player_name, value=Score)
       
