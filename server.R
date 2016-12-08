@@ -41,6 +41,7 @@ shinyServer(function(input, output) {
   output$maxMin <- renderText({
     record(players_organized, input$select)
   })
+  
   output$teamPlot <- renderPlotly({
     team(teamData, input$choice, input$first, input$teamSelected)
   })

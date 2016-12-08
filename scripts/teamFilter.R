@@ -2,7 +2,9 @@ library(dplyr)
 library(shiny)
 library(plotly)
 
-team <- function(df, choice, first, teamSelected){
+team <- function(df, choice, first, teamsSelected){
+  
+  #Removes unneeded columns that are worded
   df[,27] <- NULL
   df[,26] <- NULL
   df[,24] <- NULL
@@ -15,45 +17,61 @@ team <- function(df, choice, first, teamSelected){
   df[,12] <- NULL
   df[,10] <- NULL
   df[,8] <- NULL
+  
+  #If the radar button from server is false, it means that the user is requesting a historical 
+  #skill change of the team. 
   if(choice==FALSE){
     use2 <- df %>% arrange(date) %>% filter(team_long_name==first)
+    #saves dates before it gets eliminated
     dates <- use2$date
+    #Removes so it can easily process for the coming for loop
     use2[,1:6] <- NULL
     nameS <- colnames(use2)
+    
+    #Saves two pieces of data that will be used to plot onto the graph
     first <- c()
     second <- c()
     for(i in nameS){
       first <- c(first, eval(parse(text=paste0("use2$", i, "[1]"))))
       second <- c(second, eval(parse(text=paste0("use2$", i, "[2]"))))
     }
-    print(first)
-    print(second)
-    p <- plot_ly(x=nameS, y = first, type = 'bar', name = paste0('Old Data: ', dates[1])) %>% 
+    
+    #Creates a bar graph of a given team's stats between two dates
+    p <- plot_ly(x=nameS, y = first, type = 'bar', name = paste0('Old Data: ', dates[1]), alpha=0.6) %>% 
       add_trace(y = second, name = paste0('Newest Data: ', dates[2])) %>% 
-      layout(title = paste0('Historical change of stats for ', first), xaxis = list(title = 'Skill Type'), barmode = 'group')
+      layout(title = paste0('Historical Stats Comparison for ', first), xaxis = list(title = 'Skill Type'), barmode = "overlay")
     return(p)
+    
+    #Separate case: Compare between teams using newest data. 
   }else{
-    #use <- df %>% arrange(desc(date)) %>% subset(df!duplicated(df[,4]))
-    use[,1:6] <- NULL
-    p <- plot_ly(alpha = 0.6) %>%add_histogram(data = use[1,]) %>%add_histogram(data = use[2,]) %>%
-      layout(barmode = "group", title = paste0('Historical change of stats for ', teamSelected[1]))
-    return(p)
+    if(length(teamsSelected)==0){
+      return()
+    }else{
+      
+      use <- df %>% arrange(desc(date)) %>% filter(team_long_name == first | team_long_name %in% teamsSelected)
+      use <- subset(use, !duplicated(use[,4]))
+      teamList <- use$team_long_name
+      dates <- use$date
+      
+      use[,1:6] <- NULL
+      nameS <- colnames(use)
+      temp <- c()
+      for(i in nameS){
+        temp <- c(temp, eval(parse(text=paste0("use$", i, "[", 1, "]"))))
+      }
+      p <- plot_ly(type = 'bar', x=colnames(use), y=temp, name = paste0(teamList[1], ' Data: ', dates[1])) %>%
+        layout(barmode = "stacked", xaxis = list(title = 'Skill Type'), title = 'Team Comparisons')
+      
+      for(j in 2:length(teamList)){
+        temp <- c()
+        for(i in nameS){
+          temp <- c(temp, eval(parse(text=paste0("use$", i, "[", j, "]"))))
+        }
+        p <- p %>% add_trace(y=temp, name = paste0(teamList[j], ' Data: ', dates[j]))
+      }
+      
+      #Creates a bar graph of the data
+      return(p)
+    }
   }
 }
-
-
-
-# 
-# selectInput("buildUpPlayDribblingClass", label = h3("Build Up Play Dribbling"), choices = c("All", unique(teams$buildUpPlayDribblingClass))),
-# selectInput("buildUpPlayPassingClass", label = h3("Build Up Play Passing"), choices = c("All", unique(teams$buildUpPlayPassingClass))),
-# selectInput("buildUpPlayPositioningClass", label = h3("Build Up Play Positioning"), choices = c("All", unique(teams$buildUpPlayPositioningClass))),
-# selectInput("buildUpPlaySpeedClass", label = h3("Build Up Play Speed"), choices = c("All", unique(teams$buildUpPlaySpeedClass))),
-# selectInput("chanceCreationCrossingClass", label = h3("Chance Creation Crossing"), choices = c("All", unique(teams$chanceCreationCrossingClass))),
-# selectInput("chanceCreationPassingClass", label = h3("chance Creation Passing"), choices = c("All", unique(teams$chanceCreationPassingClass))),
-# selectInput("chanceCreationPositioningClass", label = h3("Chance Creation Positioning"), choices = c("All", unique(teams$chanceCreationPositioningClass))),
-# selectInput("chanceCreationShootingClass", label = h3("Chance Creation Shooting"), choices = c("All", unique(teams$chanceCreationShootingClass))),
-# selectInput("defenceAggressionClass", label = h3("Defence Aggression"), choices = c("All", unique(teams$defenceAggressionClass))),
-# selectInput("defenceDefenderLineClass", label = h3("Defence Defender Line"), choices = c("All", unique(teams$defenceDefenderLineClass))),
-# selectInput("defencePressureClass", label = h3("Defence Pressure"), choices = c("All", unique(teams$defencePressureClass))),
-# selectInput("defenceTeamWidthClass", label = h3("Defence Team Width"), choices = c("All", unique(teams$defenceTeamWidthClass)))
-# 
