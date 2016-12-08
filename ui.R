@@ -9,8 +9,10 @@ player <- read.csv("data/player.csv")
 player_organized <- read.csv("data/players_organized.csv")
 player_names <- as.vector(as.matrix(select(player, player_name)))
 
-# Gets only the numerical attributes on the data
-player_num_attributes <- c(colnames(player_organized)[6:7], colnames(player_organized)[10:11], colnames(player_organized)[15:47])
+# Gets the numerical attributes on the data
+player_num_attributes <- c(colnames(player_organized)[6:7], 
+                           colnames(player_organized)[10:11], 
+                           colnames(player_organized)[15:47])
 teams <- read.csv("data/team_revised.csv", stringsAsFactors = FALSE)
 team_names <- unique(teams$team_long_name)
 
@@ -37,8 +39,10 @@ shinyUI(fluidPage(theme="bootstrap.css",
     
     # ***Add your tab panels below these two comments***
     # (Note: A comma is required after each one, except for the last. You will need to put in a comma above when adding the next tabPanel)
-    tabPanel("Attribute Comparison",
-             titlePanel("Attribute Relationships"),
+    
+    # Create a tabPanel for the 
+    tabPanel("Attribute Comparison Scatter Plot",
+             titlePanel("Attribute Comparison w/ Density"),
              sidebarLayout(
                sidebarPanel(
                  selectInput("X_Value", label = h2("X Variable"),
