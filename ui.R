@@ -26,7 +26,8 @@ shinyUI(fluidPage(
                                 choices = player_names, 
                                 selected = c("Alessio Scarpi","Lionel Messi"), 
                                 multiple = TRUE,
-                                options = list(maxItems = 2))),
+                                options = list(maxItems = 2)),
+               textOutput("text")), #writing in text from text variable created in server.R file.
                mainPanel(
                  chartJSRadarOutput("radarchart"),
                  width=7))
