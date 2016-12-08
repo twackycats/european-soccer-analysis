@@ -1,5 +1,6 @@
 # european-soccer-analysis
 Analysis of european soccer data  
+https://twackycats.shinyapps.io/european-soccer-analysis/  
 
 For the radarchart tab, the following resources were used. In some cases, code snippets were taken and modified for usage in this application.  
 Usage of top_n(): http://stackoverflow.com/questions/27766054/getting-the-top-values-by-group-using-dplyr  
