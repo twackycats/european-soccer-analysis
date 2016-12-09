@@ -12,9 +12,9 @@ CreateRadarChart <- function(df, input){
       latest_stats <- subset(latest_stats, select = -player_fifa_api_id)
       # Don't try to create that chart if no players are selected
       if(length(input$players)==0){ return() }
+      
       # combine the records of the players into a dataframe using rbind
       # start with a base dataframe containing the stats for one of the players
-      
       radar_stats <- filter(latest_stats, player_name == input$players[1])
       # add additional rows for the rest of the players in input$players
       for(player in input$players[-1]){
