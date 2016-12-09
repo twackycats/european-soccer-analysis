@@ -34,7 +34,9 @@ shinyUI(fluidPage(theme="bootstrap.css",
                                 choices = player_names, 
                                 selected = c("Alessio Scarpi","Lionel Messi"), 
                                 multiple = TRUE),
-               textOutput("text")), #writing in text from text variable created in server.R file.
+              #writing in summary for player comparison page from variable created in server.R   
+               textOutput("text1")),
+               
                mainPanel(
                  chartJSRadarOutput("radarchart"),
                  width=7))
@@ -53,8 +55,9 @@ shinyUI(fluidPage(theme="bootstrap.css",
                              selected = player_num_attributes[1]),
                  selectInput("Y_Value", label = h2("Y Variable"),
                              choices = player_num_attributes,
-                             selected = player_num_attributes[2])
-               ),
+                             selected = player_num_attributes[2]),
+               #writing in summary for attribute comparison page from variable created in server.R    
+               textOutput("text2")), 
                mainPanel(
                  plotOutput('scatter')
                )
@@ -67,8 +70,10 @@ shinyUI(fluidPage(theme="bootstrap.css",
                sidebarPanel(
                  #Weight and height are removed from choices as we want users to retrieve concise 
                  #comparisons to skills in this simple part of the app. 
-                 selectInput("select", label = h3("Select an attribute: "), choices=player_num_attributes[-c(1, 2)])
-               ),
+                 selectInput("select", label = h3("Select an attribute: "), choices=player_num_attributes[-c(1, 2)]),
+                #writing in summary for best/worst player page from variable created in server.R      
+                 textOutput("text3")),
+        
                #in which the main part of the shiny app
                mainPanel(
                  #is the output of the comparison of the currently best and worst European Soccer players 
@@ -86,8 +91,10 @@ shinyUI(fluidPage(theme="bootstrap.css",
                  #Adds a selectInput to specifically choose main team to look at in general
                  selectInput("first", label = h3("Select a main team: "), choices=team_names, selected = team_names[1]),
                  #Adds other teams that could be used in conjunction to the chosen compare option from the radio selector
-                 selectizeInput("teamSelected", label=h2("Other Teams (optional)"), choices = team_names, selected = team_names[2], team_names[3], multiple = TRUE)
-               ),
+                 selectizeInput("teamSelected", label=h2("Other Teams (optional)"), choices = team_names, selected = team_names[2], team_names[3], multiple = TRUE),
+                 
+               #writing in summary for team attribute comparison page from variable created in server.R
+               textOutput("text4")),
                #in which the main part of the shiny app
                mainPanel(
                  #is the output of the comparison of the currently best and worst European Soccer players 

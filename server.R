@@ -9,8 +9,8 @@ teamData <- read.csv("data/team_revised.csv", stringsAsFactors = FALSE)
 
 shinyServer(function(input, output) {
   
-  # Creating a summary paragraph of the displayed graphic.
-  output$text <- renderText({ 
+  # Creating a summary paragraph of the player comparison page
+  output$text1 <- renderText({ 
     paste("This is a player attribute comparison radar chart between 
           two players. The default chosen players are Alessio Scarpi 
           & Lionel Messi. Looking at the chart alone, we can predict
@@ -25,6 +25,31 @@ shinyServer(function(input, output) {
           who is the more skilled player due to their strengths in 
           different categories, however the radar chart helps us determine
           which player plays which position the best.")
+  })
+  
+  # Creating a summary paragraph of the attribute comparison page
+  output$text2 <- renderText({ 
+    paste("This graphic represents an attribute comparison that shows the
+          relationship between two selected attributes. Users select two 
+          attributes as well as the axis, and a graph will show the correlation
+          between the two attributes and their respective values based on one
+          another.")
+  })
+  
+  # creating a summary sentence of the best/worst player page
+  output$text3 <- renderText({ 
+    paste("This graphic allows users to select an attribute and find out
+          which player has the best & worst rating for that attribute.")
+  })
+  
+  
+  # creating a summary paragraph of the team skill changes & comparison page
+  output$text4 <- renderText({
+    paste("This graphic has two options. One, it can compare a team's 
+          stats & attributes between two different years in that team's
+          history. It can also compare the stats & attributes between two
+          chosen teams. This can be very useful to find out which team is
+          better between two teams of modern day, or in history.")
   })
   
   # Source the chart scripts
