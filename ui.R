@@ -3,6 +3,8 @@ library(shiny)
 library(dplyr)
 library(radarchart)
 library(ggplot2)
+library(plotly)
+
 # If your UI code requires a dataframe, initialize it here.
 # read in the player.csv file and create a vector containing all player names for use in the selectizeInput
 player <- read.csv("data/player.csv")
@@ -46,11 +48,11 @@ shinyUI(fluidPage(theme="bootstrap.css",
              sidebarLayout(
                sidebarPanel(
                  selectInput("X_Value", label = h2("X Variable"),
-                             choices = player_attributes,
-                             selected = player_attributes[1]),
+                             choices = player_num_attributes,
+                             selected = player_num_attributes[1]),
                  selectInput("Y_Value", label = h2("Y Variable"),
-                             choices = player_attributes,
-                             selected = player_attributes[2])
+                             choices = player_num_attributes,
+                             selected = player_num_attributes[2])
                ),
                mainPanel(
                  plotOutput('scatter')
@@ -63,7 +65,7 @@ shinyUI(fluidPage(theme="bootstrap.css",
                sidebarPanel(
                  #Weight and height are removed from choices as we want users to retrieve concise 
                  #comparisons to skills in this simple part of the app. 
-                 selectInput("select", label = h3("Select an attribute: "), choices=player_attributes[-c(1, 2)])
+                 selectInput("select", label = h3("Select an attribute: "), choices=player_num_attributes[-c(1, 2)])
                ),
                #in which the main part of the shiny app
                mainPanel(

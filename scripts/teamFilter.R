@@ -2,6 +2,8 @@ library(dplyr)
 library(shiny)
 library(plotly)
 
+##This file is made by Kevin Tran (nfsrun). 
+
 team <- function(df, choice, first, teamsSelected){
   
   #Removes unneeded columns that are worded
@@ -29,17 +31,17 @@ team <- function(df, choice, first, teamsSelected){
     nameS <- colnames(use2)
     
     #Saves two pieces of data that will be used to plot onto the graph
-    first <- c()
+    one <- c()
     second <- c()
     for(i in nameS){
-      first <- c(first, eval(parse(text=paste0("use2$", i, "[1]"))))
+      one <- c(one, eval(parse(text=paste0("use2$", i, "[1]"))))
       second <- c(second, eval(parse(text=paste0("use2$", i, "[2]"))))
     }
     
     #Creates a bar graph of a given team's stats between two dates
-    p <- plot_ly(x=nameS, y = first, type = 'bar', name = paste0('Old Data: ', dates[1]), alpha=0.6) %>% 
+    p <- plot_ly(x=nameS, y = one, type = 'bar', name = paste0('Old Data: ', dates[1]), alpha=0.6) %>% 
       add_trace(y = second, name = paste0('Newest Data: ', dates[2])) %>% 
-      layout(title = paste0('Historical Stats Comparison for ', first), xaxis = list(title = 'Skill Type'), barmode = "overlay")
+      layout(title = paste0('Historical Stats Comparison for ', first), barmode = "overlay")
     return(p)
     
     #Separate case: Compare between teams using newest data. 
