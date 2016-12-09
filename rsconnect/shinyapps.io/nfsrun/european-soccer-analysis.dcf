@@ -1,0 +1,10 @@
+name: european-soccer-analysis
+title: european-soccer-analysis
+account: nfsrun
+server: shinyapps.io
+appId: 143323
+bundleId: 641500
+url: https://nfsrun.shinyapps.io/european-soccer-analysis/
+when: 1481244735.90827
+asMultiple: FALSE
+asStatic: FALSE
