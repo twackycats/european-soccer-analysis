@@ -23,6 +23,7 @@ shinyUI(fluidPage(theme="bootstrap.css",
   # Create a navbarPage
   navbarPage("European Soccer Analysis",
     selected = "Player Attribute Radar Chart",
+    
     # Create a tabPanel for the Player Attribute Radar Chart
     tabPanel("Player Attribute Radar Chart",
              titlePanel("Player Attribute Comparison"),
@@ -59,6 +60,7 @@ shinyUI(fluidPage(theme="bootstrap.css",
                )
              )
     ),
+    
     tabPanel("Best/Worst Comparison", 
              #Creates a sidebar layout
              sidebarLayout(
@@ -74,6 +76,7 @@ shinyUI(fluidPage(theme="bootstrap.css",
                )
              )
     ),
+    
     tabPanel("Team Skill Changes and Comparisons", 
              #Creates a   sidebar layout
              sidebarLayout(

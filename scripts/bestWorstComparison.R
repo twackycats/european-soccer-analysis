@@ -7,6 +7,8 @@ record <- function(use, input){
   
   #best player with complete relevent information at hand
   use <- use %>% select_("player_name", input)
+  # this is a bit hacky, but it was necessary since regular filter statements weren't working (even with non-standard eval). 
+  # The columns had to be renamed in order to be referenced
   use <- subset(use, select = -player_fifa_api_id)
   colnames(use) <- c('name', 'var')
   best <- use %>% top_n(n=1, wt=var)

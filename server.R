@@ -27,11 +27,12 @@ shinyServer(function(input, output) {
           which player plays which position the best.")
   })
   
-  # Source the radarchart.R script
+  # Source the chart scripts
   source("scripts/radarchart.R")
   source("scripts/CreateScatter.r")
   source("scripts/bestWorstComparison.R")
   source("scripts/teamFilter.R")
+  
   # Call the CreateRadarChart function, providing the players_organized dataframe and input as parameters. This function returns a radarChart.
   output$radarchart <- CreateRadarChart(players_organized, input)
   
